@@ -11,6 +11,19 @@ if (typeof process === 'undefined') {
   }
 }
 
+// add this 2 functions
+if (typeof btoa === 'undefined') {
+  global.btoa = function (str) {
+    return new Buffer(str, 'binary').toString('base64');
+  };
+}
+
+if (typeof atob === 'undefined') {
+  global.atob = function (b64Encoded) {
+    return new Buffer(b64Encoded, 'base64').toString('binary');
+  };
+}
+
 process.browser = false
 if (typeof Buffer === 'undefined') global.Buffer = require('buffer').Buffer
 
@@ -23,4 +36,4 @@ if (typeof localStorage !== 'undefined') {
 
 // If using the crypto shim, uncomment the following line to ensure
 // crypto is loaded first, so it can populate global.crypto
-// require('crypto')
+require('crypto')
