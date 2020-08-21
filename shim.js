@@ -11,6 +11,9 @@ if (typeof process === 'undefined') {
   }
 }
 
+process.browser = false
+if (typeof Buffer === 'undefined') global.Buffer = require('buffer').Buffer
+
 // add this 2 functions
 if (typeof btoa === 'undefined') {
   global.btoa = function (str) {
@@ -23,9 +26,6 @@ if (typeof atob === 'undefined') {
     return new Buffer(b64Encoded, 'base64').toString('binary');
   };
 }
-
-process.browser = false
-if (typeof Buffer === 'undefined') global.Buffer = require('buffer').Buffer
 
 // global.location = global.location || { port: 80 }
 const isDev = typeof __DEV__ === 'boolean' && __DEV__
